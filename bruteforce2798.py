@@ -24,16 +24,37 @@ N장의 카드에 써져 있는 숫자가 주어졌을 때, M을 넘지 않으�
 5 6 7 8 9
 예제 출력 1
 21
-
+ing
 '''
+#import random
+from itertools import combinations
 
 N, M = map(int, input().split())
 nums = []
 nums = input().split()
 nums = list(map(int, nums))
 
-cards = []
+#cards = list(random.sample(nums, 3))
 
-for i in range(0, N):
-    cards = nums[i]
-    
+cards = list(combinations(nums, 3))
+cards_lists = [list(i) for i in cards]
+cards_sum = []
+for i in range(0, len(cards_lists)):
+    cards_sum.append(sum(cards_lists[i]))
+
+#print(cards_sum)
+M_list = [M for i in range(0, len(cards_sum))]
+#print(M_list)
+sub_list = []
+
+for i in range(0, len(cards_sum)):
+    if M_list[i]-cards_sum[i] < 0:
+        sub_list.append(30000000)
+    else:
+        sub_list.append(M_list[i]-cards_sum[i])
+
+#print(sub_list)
+min_num = min(sub_list)
+print(cards_sum[sub_list.index(min_num)])
+
+

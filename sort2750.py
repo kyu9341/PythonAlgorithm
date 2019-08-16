@@ -17,15 +17,19 @@ N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로�
 2
 3
 4
-1
+g1
 예제 출력 1
 1
 2
 3
 4
 5
+ing
 '''
 n = int(input())
-nums = []
+nums = list()
 for i in range(0, n):
-    nums = int(input())
+    nums.append(int(input()))
+nums.sort()
+for i in range(0, n):
+    print(nums[i])
