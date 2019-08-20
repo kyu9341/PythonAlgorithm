@@ -24,9 +24,8 @@ N장의 카드에 써져 있는 숫자가 주어졌을 때, M을 넘지 않으�
 5 6 7 8 9
 예제 출력 1
 21
-ing
+
 '''
-#import random
 from itertools import combinations
 
 N, M = map(int, input().split())
@@ -34,26 +33,23 @@ nums = []
 nums = input().split()
 nums = list(map(int, nums))
 
-#cards = list(random.sample(nums, 3))
-
-cards = list(combinations(nums, 3))
-cards_lists = [list(i) for i in cards]
+cards = list(combinations(nums, 3)) # nums의 3개로 이루어진 중복하지 않는 모든 조합을 구함
+# [(5, 6, 7), (5, 6, 8), (5, 6, 9), (5, 7, 8), (5, 7, 9), (5, 8, 9), (6, 7, 8), (6, 7, 9), (6, 8, 9), (7, 8, 9)]
+cards_lists = [list(i) for i in cards] # 리스트 내의 튜플의 형태를 리스트 내의 리스트로 변환
+# [[5, 6, 7], [5, 6, 8], [5, 6, 9], [5, 7, 8], [5, 7, 9], [5, 8, 9], [6, 7, 8], [6, 7, 9], [6, 8, 9], [7, 8, 9]]
 cards_sum = []
-for i in range(0, len(cards_lists)):
+for i in range(0, len(cards_lists)): # 각 리스트의 합을 원소로 하는 리스트 cards_sum
     cards_sum.append(sum(cards_lists[i]))
 
-#print(cards_sum)
-M_list = [M for i in range(0, len(cards_sum))]
-#print(M_list)
+M_list = [M for i in range(0, len(cards_sum))] # 모든 원소가 M인 cards_sum과 크기가 같은 리스트 생성
 sub_list = []
 
 for i in range(0, len(cards_sum)):
-    if M_list[i]-cards_sum[i] < 0:
+    if M_list[i]-cards_sum[i] < 0: # 차가 0보다 작아지는 경우 최소값으로 나오지 않도록 지정
         sub_list.append(30000000)
     else:
-        sub_list.append(M_list[i]-cards_sum[i])
+        sub_list.append(M_list[i]-cards_sum[i]) # 각 원소의 차이를 저장하는 리스트 sub_list
 
-#print(sub_list)
 min_num = min(sub_list)
 print(cards_sum[sub_list.index(min_num)])
 
